@@ -1,5 +1,21 @@
 # Terraform AWS IAM Role module
 
+## Example Usage
+
+Example of aws iam role for ecs task.
+```
+module "iam_task_role" {
+  source       = "github.com/bryan-rhm/terraform-aws-iam-role?ref=v1.0.0"
+  name         = "task-ecs-role"
+  statement_id = "TaskExecution"
+  trusted_identifier = {
+    type        = "Service"
+    identifiers = ["ecs-tasks.amazonaws.com"]
+  }
+  managed_policy_arns = [module.iam_task_policy.output.arn]
+}
+```
+
 ## Requirements
 
 | Name | Version |
